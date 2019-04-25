@@ -1,0 +1,7 @@
+<div class="login-container">
+    <form>
+        <input [(ngModel)]="email" name="email" type="email" placeholder="E-mail" autocomplete="off" required />
+        <input [(ngModel)]="password" name="password" type="password" placeholder="Password" required />
+        <button (click)="signIn()" [disabled]="!email || !password">Sign In</button>
+    </form>
+</div>
