@@ -22,3 +22,5 @@ export class SignInFailed implements Action {
     public readonly type = ESignInActions.SignInFailed;
     constructor(public payload: ISignInResponse) {}
 }
+
+export type SignInActions = SignIn | SignInSuccess | SignInFailed;
