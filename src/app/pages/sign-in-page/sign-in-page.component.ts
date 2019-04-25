@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { IAppState } from 'src/app/store/state/app.state';
+import { SignIn } from 'src/app/store/actions/sign-in.actions';
 
 @Component({
     selector: 'app-sign-in',
@@ -9,9 +12,9 @@ export class SignInComponent {
     public email: string;
     public password: string;
 
-    constructor() {}
+    constructor(private store: Store<IAppState>) {}
 
     signIn(): void {
-
+        this.store.dispatch(new SignIn({email: this.email, password: this.password}));
     }
 }
