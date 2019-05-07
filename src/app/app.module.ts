@@ -12,6 +12,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { SignInEffects } from './store/effects/sign-in.effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { UsersListModule } from './pages/users-list-page/users-list-page.module';
+import { UsersListEffects } from './store/effects/users-list.effects';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,11 +22,12 @@ import { UsersListModule } from './pages/users-list-page/users-list-page.module'
   imports: [
     BrowserModule,
     CommonModule,
+    HttpClientModule,
     AppRoutingModule,
     SignInModule,
     UsersListModule,
     StoreModule.forRoot(appReducers),
-    EffectsModule.forRoot([SignInEffects]),
+    EffectsModule.forRoot([SignInEffects, UsersListEffects]),
     StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
     StoreDevtoolsModule.instrument()
   ],
