@@ -1,34 +1,43 @@
 import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { IAppState } from '../state/app.state';
 import { SignInService } from 'src/app/pages/sign-in-page/sign-in-page.service';
-import { ESignInActions, SignIn, SignInSuccess } from '../actions/sign-in.actions';
-import { switchMap, map, withLatestFrom } from 'rxjs/operators';
-import { IUserCredentials } from 'src/app/shared/interfaces/user-credentials.interface';
+import { ESignInActions, SignIn, SignInSuccess, SignInFailed } from '../actions/sign-in.actions';
+import { switchMap, map } from 'rxjs/operators';
 import { ISignInResponse } from 'src/app/shared/interfaces/sign-in-response.inteface';
-
+import randomize from '../../shared/utils/randomize';
+import { of, iif } from 'rxjs';
 
 @Injectable()
 export class SignInEffects {
     constructor(
         private actions$: Actions,
-        private store: Store<IAppState>,
         private signInService: SignInService
     ) {}
 
     @Effect()
     signIn$ = this.actions$.pipe(
-        ofType<SignIn>(ESignInActions.SignIn),
-        map((action: SignIn) => {
-            console.warn(action.payload);
-            return action.payload;
+        ofType(ESignInActions.SignIn),
+        switchMap((action: SignIn) => {
+            return iif(randomize, this.signInService.signIn(action.payload), of('Cannot be authorized!'));
         }),
-        switchMap((credentials: IUserCredentials) => {
-            const resp = this.signInService.signIn(credentials);
-            console.warn(resp);
-            return resp;
-        }),
-        map((response: ISignInResponse) => new SignInSuccess(response))
+        map((response: ISignInResponse) => {
+            return response.token ? new SignInSuccess(response) : new SignInFailed(response);
+        })
+    );
+
+    @Effect({dispatch: false})
+    signInSuccess$ = this.actions$.pipe(
+        ofType(ESignInActions.SignInSuccess),
+        map((action: SignInSuccess) => {
+            localStorage.setItem('token', JSON.stringify(action.payload.token));
+        })
+    );
+
+    @Effect({dispatch: false})
+    signInFailed$ = this.actions$.pipe(
+        ofType(ESignInActions.SignInFailed),
+        map((action: SignInFailed) => {
+            localStorage.removeItem('token');
+        })
     );
 }

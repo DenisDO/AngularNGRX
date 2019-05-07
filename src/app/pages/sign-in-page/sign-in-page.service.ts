@@ -10,6 +10,11 @@ export class SignInService {
     constructor(private http: HttpClient) {}
 
     signIn(requestBody: IUserCredentials): Observable<ISignInResponse> {
-        return this.http.post<ISignInResponse>(`${USERS_BASE_API_URL}/login`, requestBody);
+        // return this.http.post<ISignInResponse>(`${USERS_BASE_API_URL}/login`, requestBody);
+        return Observable.create(observer => {
+            observer.next({
+                token: 'asdr5t6y7u8i9o0lpplmkiuy65rdfvbnkjui099j'
+            });
+        });
     }
 }
