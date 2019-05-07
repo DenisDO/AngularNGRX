@@ -11,6 +11,7 @@ import { appReducers } from './store/reducers/app.reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { SignInEffects } from './store/effects/sign-in.effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { UsersListModule } from './pages/users-list-page/users-list-page.module';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
     CommonModule,
     AppRoutingModule,
     SignInModule,
+    UsersListModule,
     StoreModule.forRoot(appReducers),
     EffectsModule.forRoot([SignInEffects]),
     StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
