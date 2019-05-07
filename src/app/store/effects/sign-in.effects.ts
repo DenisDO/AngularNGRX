@@ -6,12 +6,14 @@ import { switchMap, map } from 'rxjs/operators';
 import { ISignInResponse } from 'src/app/shared/interfaces/sign-in-response.inteface';
 import randomize from '../../shared/utils/randomize';
 import { of, iif } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class SignInEffects {
     constructor(
         private actions$: Actions,
-        private signInService: SignInService
+        private signInService: SignInService,
+        private router: Router
     ) {}
 
     @Effect()
@@ -30,6 +32,7 @@ export class SignInEffects {
         ofType(ESignInActions.SignInSuccess),
         map((action: SignInSuccess) => {
             localStorage.setItem('token', JSON.stringify(action.payload.token));
+            this.router.navigate(['/users']);
         })
     );
 

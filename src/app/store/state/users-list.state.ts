@@ -1,7 +1,7 @@
-import { IUsersListResponse } from 'src/app/shared/interfaces/users-list-response.interface';
+import { IUser } from 'src/app/shared/interfaces/user.interface';
 
 export interface IUsersListState {
-    usersList: IUsersListResponse;
+    usersList: IUser[];
 }
 
 export const initialUsersListState: IUsersListState = {
