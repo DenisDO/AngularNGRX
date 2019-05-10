@@ -12,12 +12,15 @@ import { selectUsersList } from 'src/app/store/selectors/users-list.selectors';
 export class UsersListComponent implements OnInit {
     constructor(
         private store: Store<IAppState>
-        ) {}
+    ) {}
 
-    columnsToDisplay = ['userID', 'userAvatar', 'userName', 'userSurname'];
-    usersList$ = this.store.pipe(select(selectUsersList));
+    public usersList$ = this.store.pipe(select(selectUsersList));
 
     ngOnInit(): void {
         this.store.dispatch(new LoadUsers());
+    }
+
+    selectUser(user) {
+        console.log(user);
     }
 }
