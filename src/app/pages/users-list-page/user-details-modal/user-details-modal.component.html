@@ -14,15 +14,38 @@
           class="close"
           data-dismiss="modal"
           aria-label="Close"
+          (click)="clearCurrentUser()"
         >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        MODAL BODY
+      <div class="modal-body card">
+        <img
+          class="card-img-top"
+          [src]="(currentUser$ | async)?.photo"
+          alt="Card image cap"
+        />
+        <div class="card-body">
+          <h5 class="card-title">
+            {{ (currentUser$ | async)?.age }}
+            years old
+            {{ (currentUser$ | async)?.title }}.
+            {{ (currentUser$ | async)?.name }}
+            {{ (currentUser$ | async)?.surname }}
+            from
+            {{ (currentUser$ | async)?.region }}
+          </h5>
+          <p class="card-text">{{ (currentUser$ | async)?.phone }}</p>
+          <p class="card-text">{{ (currentUser$ | async)?.email }}</p>
+        </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-dismiss="modal"
+          (click)="clearCurrentUser()"
+        >
           Close
         </button>
       </div>
