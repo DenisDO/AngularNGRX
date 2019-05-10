@@ -1,5 +1,5 @@
-<table class="table table-hover table-striped">
-  <thead>
+<table class="table table-hover table-striped table-dark">
+  <thead class=thead-light>
     <tr>
       <th>Name</th>
       <th>Region</th>
@@ -8,7 +8,7 @@
     </tr>
   </thead>
   <tbody data-toggle="modal" data-target="#userDetailsModal">
-    <tr *ngFor="let user of 'usersList' | i18nSelect: (usersList$ | async)" (click)="selectUser(user)">
+    <tr *ngFor="let user of 'usersList' | i18nSelect: (usersList$ | async)" (click)="selectCurrentUser(user)">
       <td>{{ user.name }} {{ user.surname }}</td>
       <td>{{ user.region }}</td>
       <td>{{ user.age }}</td>

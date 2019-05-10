@@ -3,6 +3,7 @@ import { IAppState } from 'src/app/store/state/app.state';
 import { Store, select } from '@ngrx/store';
 import { LoadUsers } from 'src/app/store/actions/users-list.action';
 import { selectUsersList } from 'src/app/store/selectors/users-list.selectors';
+import { SelectCurrentUser } from 'src/app/store/actions/user-details.actions';
 
 @Component({
     selector: 'app-users-list',
@@ -20,7 +21,7 @@ export class UsersListComponent implements OnInit {
         this.store.dispatch(new LoadUsers());
     }
 
-    selectUser(user) {
-        console.log(user);
+    selectCurrentUser(user) {
+        this.store.dispatch(new SelectCurrentUser(user));
     }
 }
