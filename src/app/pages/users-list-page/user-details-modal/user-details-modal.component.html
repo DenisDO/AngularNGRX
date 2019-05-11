@@ -4,6 +4,7 @@
   tabindex="-1"
   role="dialog"
   aria-hidden="true"
+  (click)="clearCurrentUser()"
 >
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -22,7 +23,7 @@
       <div class="modal-body card">
         <img
           class="card-img-top"
-          [src]="(currentUser$ | async)?.photo"
+          [attr.src]="(currentUser$ | async)?.photo"
           alt="Card image cap"
         />
         <div class="card-body">
