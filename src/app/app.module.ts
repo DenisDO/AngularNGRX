@@ -14,6 +14,7 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { UsersListModule } from './pages/users-list-page/users-list-page.module';
 import { UsersListEffects } from './store/effects/users-list.effects';
 import { HttpClientModule } from '@angular/common/http';
+import { IsUserGuard } from './core/guards/isUser.guard';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,7 @@ import { HttpClientModule } from '@angular/common/http';
     StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
     StoreDevtoolsModule.instrument()
   ],
-  providers: [],
+  providers: [IsUserGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
