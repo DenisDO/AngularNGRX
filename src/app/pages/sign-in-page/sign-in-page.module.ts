@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { SignInComponent } from './sign-in-page.component';
 import { CommonModule } from '@angular/common';
 import { SignInService } from './sign-in-page.service';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -10,7 +10,8 @@ import { FormsModule } from '@angular/forms';
     ],
     imports: [
         CommonModule,
-        FormsModule
+        FormsModule,
+        ReactiveFormsModule
     ],
     providers: [
         SignInService
